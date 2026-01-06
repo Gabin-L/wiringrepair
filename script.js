@@ -125,4 +125,61 @@
       // form.reset();
     });
   }
+
+  /* ---------------------------------------
+     5) Minimal carousel for "Réalisations"
+  --------------------------------------- */
+  const carousels = $$("[data-carousel]");
+
+  carousels.forEach((carousel) => {
+    const track = $(".carousel__track", carousel);
+    const slides = $$(".carousel__slide", carousel);
+    const prevBtn = $('[data-action="prev"]', carousel);
+    const nextBtn = $('[data-action="next"]', carousel);
+    const dotsWrap = $(".carousel__dots", carousel);
+
+    if (!track || !slides.length || !prevBtn || !nextBtn || !dotsWrap) return;
+
+    let index = 0;
+
+    const buildDots = () => {
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel__dot";
+        dot.setAttribute("aria-label", `Aller à la réalisation ${i + 1}`);
+        dot.setAttribute("aria-current", i === index ? "true" : "false");
+        dot.addEventListener("click", () => {
+          index = i;
+          update();
+        });
+        dotsWrap.appendChild(dot);
+      });
+    };
+
+    const update = () => {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      const dots = $$(".carousel__dot", carousel);
+      dots.forEach((dot, i) => {
+        dot.setAttribute("aria-current", i === index ? "true" : "false");
+      });
+    };
+
+    const goPrev = () => {
+      index = (index - 1 + slides.length) % slides.length;
+      update();
+    };
+
+    const goNext = () => {
+      index = (index + 1) % slides.length;
+      update();
+    };
+
+    prevBtn.addEventListener("click", goPrev);
+    nextBtn.addEventListener("click", goNext);
+
+    buildDots();
+    update();
+  });
 })();
