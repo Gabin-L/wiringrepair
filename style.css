@@ -408,6 +408,17 @@ h1 {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.supplies__cta {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.supplies__btn {
+  min-width: 240px;
+  padding: 0 22px;
+}
+
 .card h3 {
   font-size: 15px;
 }
@@ -666,5 +677,13 @@ details p {
 
   .btn {
     height: 42px;
+  }
+
+  .supplies__cta {
+    justify-content: stretch;
+  }
+
+  .supplies__btn {
+    width: 100%;
   }
 }
