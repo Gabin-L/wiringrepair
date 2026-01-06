@@ -34,23 +34,9 @@ body {
   min-height: 100vh;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(120deg, rgba(10, 16, 25, 0.3), rgba(245, 245, 245, 0.2)),
-    url("https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80")
-      center/cover no-repeat;
-  z-index: 0;
-}
-
+body::before,
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(247, 247, 245, 0.92), rgba(247, 247, 245, 0.78));
-  z-index: 0;
-  pointer-events: none;
+  content: none;
 }
 
 body > * {
