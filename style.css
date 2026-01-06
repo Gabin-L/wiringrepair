@@ -818,7 +818,11 @@ details p {
 }
 
 .shot img {
+  width: 100%;
+  height: clamp(220px, 32vw, 340px);
   border-radius: 12px;
+  object-fit: cover;
+  display: block;
 }
 
 .shot figcaption {
