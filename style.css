@@ -466,6 +466,27 @@ h1 {
   line-height: 1.7;
 }
 
+.service-card {
+  display: grid;
+  gap: 10px;
+}
+
+.service-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(31, 41, 55, 0.08);
+  color: var(--accent);
+}
+
+.service-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
 .steps {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -697,6 +718,32 @@ details p {
   gap: 14px;
 }
 
+.gallery__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 4px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.legend svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+}
+
 .shot img {
   border-radius: 12px;
 }
@@ -743,6 +790,10 @@ details p {
 
   .section__tag {
     white-space: normal;
+  }
+
+  .gallery__legend {
+    margin-bottom: 12px;
   }
 }
 
