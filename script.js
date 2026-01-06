@@ -79,6 +79,24 @@
      - This is a static-site friendly approach.
      - Replace EMAIL_TO with your real email.
   --------------------------------------- */
+  const rotator = document.querySelector("[data-rotate='true']");
+  const rotateMessages = [
+    "Éliminer les pannes intermittentes",
+    "Sécuriser la connectique critique",
+    "Assurer une étanchéité durable",
+    "Remettre en route sans immobilisation longue",
+  ];
+  let rotateIndex = 0;
+
+  if (rotator && (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    const applyMessage = () => {
+      rotateIndex = (rotateIndex + 1) % rotateMessages.length;
+      rotator.textContent = rotateMessages[rotateIndex];
+    };
+
+    setInterval(applyMessage, 3600);
+  }
+
   const EMAIL_TO = "contact@yourdomain.com"; // <-- replace with your real email
   const form = $(".form");
 
