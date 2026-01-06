@@ -27,6 +27,7 @@ body {
   font-family: "Inter", "SF Pro Text", system-ui, -apple-system, Segoe UI, sans-serif;
   color: var(--text);
   background: var(--bg);
+  background-image: none;
   letter-spacing: 0.2px;
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
@@ -390,6 +391,73 @@ h1 {
 .field__input--area {
   min-height: 110px;
   resize: vertical;
+}
+
+.dropzone {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px dashed var(--line);
+  background: var(--surface-muted);
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.dropzone__title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.dropzone__subtitle,
+.dropzone__cta {
+  font-size: 12px;
+}
+
+.dropzone__cta {
+  color: var(--accent);
+}
+
+.dropzone.is-dragover {
+  border-color: var(--accent);
+  background: rgba(31, 41, 55, 0.08);
+  color: var(--text);
+}
+
+.dropzone__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.file-list li {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.form__status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .note {

@@ -75,54 +75,120 @@
   }
 
   /* ---------------------------------------
-     4) Form UX: validate + build email fallback
-     - This is a static-site friendly approach.
+     4) Form UX: validate + send (backend) + mailto fallback
      - Replace EMAIL_TO with your real email.
   --------------------------------------- */
   const EMAIL_TO = "contact@yourdomain.com"; // <-- replace with your real email
   const form = $(".form");
+  const dropzone = $(".dropzone");
+  const fileInput = $("#files");
+  const fileList = $("#fileList");
+  const status = $(".form__status");
+
+  const renderFileList = () => {
+    if (!fileList || !fileInput) return;
+    const files = Array.from(fileInput.files || []);
+    fileList.innerHTML = "";
+    if (!files.length) return;
+    files.forEach((file) => {
+      const item = document.createElement("li");
+      item.textContent = `${file.name} (${Math.round(file.size / 1024)} Ko)`;
+      fileList.appendChild(item);
+    });
+  };
+
+  const setStatus = (message, isError = false) => {
+    if (!status) return;
+    status.textContent = message;
+    status.style.color = isError ? "#b42318" : "";
+  };
+
+  if (dropzone && fileInput) {
+    ["dragenter", "dragover"].forEach((evt) => {
+      dropzone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropzone.classList.add("is-dragover");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((evt) => {
+      dropzone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("is-dragover");
+      });
+    });
+
+    dropzone.addEventListener("drop", (e) => {
+      if (!e.dataTransfer) return;
+      fileInput.files = e.dataTransfer.files;
+      renderFileList();
+    });
+
+    fileInput.addEventListener("change", renderFileList);
+  }
+
+  const buildMailtoFallback = () => {
+    const name = $("#name")?.value.trim() || "";
+    const email = $("#email")?.value.trim() || "";
+    const app = $("#app")?.value || "";
+    const urgency = $("#urgency")?.value || "";
+    const msg = $("#msg")?.value.trim() || "";
+    const files = Array.from(fileInput?.files || []).map((file) => file.name);
+
+    const subject = `[Quote Request] ${app} wiring harness repair (${urgency})`;
+    const bodyLines = [
+      "New request:",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Application: ${app}`,
+      `Urgency: ${urgency}`,
+      "",
+      "Problem:",
+      msg,
+      "",
+      files.length ? `Files prepared: ${files.join(", ")}` : "Files: none attached",
+      "Photos: please attach photos of the connector / loom area when replying.",
+    ];
+
+    return (
+      `mailto:${encodeURIComponent(EMAIL_TO)}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(bodyLines.join("\n"))}`
+    );
+  };
 
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Basic HTML5 validity
       if (typeof form.checkValidity === "function" && !form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
-      const name = $("#name")?.value.trim() || "";
-      const email = $("#email")?.value.trim() || "";
-      const app = $("#app")?.value || "";
-      const urgency = $("#urgency")?.value || "";
-      const msg = $("#msg")?.value.trim() || "";
+      const endpoint = form.getAttribute("action") || "/api/contact";
+      const payload = new FormData(form);
 
-      const subject = `[Quote Request] ${app} wiring harness repair (${urgency})`;
-      const bodyLines = [
-        "New request:",
-        "",
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Application: ${app}`,
-        `Urgency: ${urgency}`,
-        "",
-        "Problem:",
-        msg,
-        "",
-        "Photos: please attach photos of the connector / loom area when replying.",
-      ];
+      setStatus("Envoi en cours...");
 
-      const mailto =
-        `mailto:${encodeURIComponent(EMAIL_TO)}` +
-        `?subject=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: payload,
+        });
 
-      // Open user's mail client (works on static hosting)
-      window.location.href = mailto;
+        if (!response.ok) {
+          throw new Error("request_failed");
+        }
 
-      // Optional: clear after triggering mail client
-      // form.reset();
+        setStatus("Merci ! Votre demande a été envoyée.");
+        form.reset();
+        renderFileList();
+      } catch (err) {
+        setStatus("Échec de l'envoi automatique. Ouverture de votre messagerie...", true);
+        window.location.href = buildMailtoFallback();
+      }
     });
   }
 

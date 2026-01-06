@@ -19,6 +19,7 @@
       <nav class="nav" aria-label="Navigation principale">
         <a href="#services">Services</a>
         <a href="#process">Méthode</a>
+        <a href="#workflow">Organisation</a>
         <a href="#gallery">Réalisations</a>
         <a href="#supplies">Préparation</a>
         <a href="#faq">FAQ</a>
@@ -71,7 +72,7 @@
           <h2 class="card__title">Demande express</h2>
           <p class="card__subtitle">Indiquez l'essentiel pour un retour clair.</p>
 
-          <form class="form" action="#" method="post">
+          <form class="form" action="/api/contact" method="post" enctype="multipart/form-data">
             <div class="form__row">
               <div class="field">
                 <label class="field__label" for="name">Nom</label>
@@ -108,7 +109,19 @@
               <textarea class="field__input field__input--area" id="msg" name="msg" placeholder="Modèle, année, symptômes, zone concernée. Ajoutez des photos lors de l'envoi." required></textarea>
             </div>
 
+            <div class="field">
+              <span class="field__label">Fichiers</span>
+              <label class="dropzone" for="files">
+                <span class="dropzone__title">Déposez des photos ou des documents</span>
+                <span class="dropzone__subtitle">Formats acceptés : JPG, PNG, PDF (max 5 fichiers).</span>
+                <span class="dropzone__cta">Ou cliquez pour sélectionner</span>
+              </label>
+              <input class="dropzone__input" id="files" name="files" type="file" multiple accept=".jpg,.jpeg,.png,.pdf" />
+              <ul class="file-list" id="fileList" aria-live="polite"></ul>
+            </div>
+
             <button class="btn btn--primary btn--full" type="submit">Envoyer</button>
+            <div class="form__status" role="status" aria-live="polite"></div>
             <p class="note">Des photos nettes accélèrent le diagnostic.</p>
           </form>
 
@@ -264,6 +277,47 @@
             <div class="banner__text">Processus stable et documentation claire pour les interventions récurrentes.</div>
           </div>
           <a class="btn btn--primary" href="#contact">Organisation dédiée</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2>Organisation & déploiement</h2>
+            <p class="section__sub">Tâches structurées et mise en production via des merges.</p>
+          </div>
+          <div class="section__tag">Backlog · Revue · Livraison</div>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="card card--soft">
+            <h3>Structure des tâches</h3>
+            <ul>
+              <li>Backlog priorisé par impact et urgence.</li>
+              <li>Colonnes : À faire, En cours, À valider.</li>
+              <li>Checklist de tests avant fermeture.</li>
+            </ul>
+          </article>
+
+          <article class="card card--soft">
+            <h3>Déploiement via merges</h3>
+            <ul>
+              <li>Branche dédiée par intervention.</li>
+              <li>Revue + validation avant merge.</li>
+              <li>Merge sur la branche principale = déploiement.</li>
+            </ul>
+          </article>
+
+          <article class="card card--soft">
+            <h3>Suivi & retours</h3>
+            <ul>
+              <li>Compte rendu clair avec photos.</li>
+              <li>Historique des interventions centralisé.</li>
+              <li>Retour client sous 24h.</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -497,6 +551,7 @@
             </div>
             <div class="footer__right">
               <a href="#services">Services</a>
+              <a href="#workflow">Organisation</a>
               <a href="#gallery">Réalisations</a>
               <a href="#contact">Contact</a>
             </div>
