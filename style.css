@@ -1,0 +1,625 @@
+/* =========================================================
+   style.css (LIGHT THEME • FULL SITE • Responsive • Clean)
+   Works with the latest HTML structure + carousel classes.
+   Notes:
+   - Keep your existing HTML class names.
+   - Includes header, hero, sections, grids, steps, faq, contact,
+     and the professional carousel.
+========================================================= */
+
+/* ---------- Theme tokens ---------- */
+:root{
+  --bg:#f6f7fb;
+  --bg2:#ffffff;
+
+  --surface:rgba(255,255,255,.92);
+  --surface2:rgba(15,23,42,.04);
+  --surface3:rgba(15,23,42,.06);
+
+  --text:#0b1220;
+  --muted:#4b5563;
+
+  --line:rgba(15,23,42,.12);
+
+  --accent:#2563eb;   /* blue */
+  --accent2:#22c55e;  /* green */
+
+  --radius:18px;
+  --shadow:0 18px 40px rgba(15,23,42,.08);
+
+  --max:1120px;
+}
+
+/* ---------- Reset / Base ---------- */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 85% -20%, rgba(37,99,235,.10), transparent 55%),
+    radial-gradient(900px 520px at 0% 18%, rgba(34,197,94,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 55%, var(--bg) 100%);
+  letter-spacing:.2px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+p{margin:0}
+h1,h2,h3{margin:0}
+ul{margin:0;padding-left:18px}
+button,input,select,textarea{font:inherit}
+
+/* Utilities */
+.container{max-width:var(--max);margin:0 auto;padding:0 24px}
+.muted{color:var(--muted)}
+.mt{margin-top:14px}
+
+/* ---------- Header ---------- */
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,.78);
+  border-bottom:1px solid var(--line);
+}
+.header.is-scrolled{box-shadow:0 10px 30px rgba(15,23,42,.08)}
+
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:14px 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:950;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+.brand__mark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg, rgba(37,99,235,.95), rgba(34,197,94,.85));
+  box-shadow:0 14px 26px rgba(37,99,235,.16);
+  position:relative;
+  flex:0 0 auto;
+}
+.brand__mark:before{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border-radius:8px;
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+.nav a{
+  padding:8px 10px;
+  border-radius:10px;
+  color:var(--muted);
+}
+.nav a:hover{
+  background:rgba(15,23,42,.06);
+  color:var(--text);
+}
+.nav a.is-active{
+  background:rgba(37,99,235,.10);
+  color:var(--text);
+  border:1px solid rgba(37,99,235,.18);
+}
+
+.header__cta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  white-space:nowrap;
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:40px;
+  padding:0 14px;
+  border-radius:12px;
+  font-weight:900;
+  font-size:14px;
+  border:1px solid var(--line);
+  transition:transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  user-select:none;
+}
+.btn:active{transform:translateY(1px)}
+
+.btn--ghost{
+  background:rgba(255,255,255,.75);
+}
+.btn--ghost:hover{
+  background:rgba(15,23,42,.04);
+  border-color:rgba(15,23,42,.18);
+}
+
+.btn--primary{
+  border:0;
+  color:#fff;
+  background:linear-gradient(135deg, rgba(37,99,235,.98), rgba(34,197,94,.92));
+  box-shadow:0 16px 28px rgba(37,99,235,.18);
+}
+.btn--primary:hover{
+  filter:saturate(1.05);
+  box-shadow:0 18px 34px rgba(37,99,235,.22);
+}
+
+.btn--full{width:100%}
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+.card--soft{
+  background:rgba(255,255,255,.72);
+  box-shadow:none;
+}
+.card__title{font-size:16px;font-weight:950}
+.card__subtitle{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:56px 0 22px}
+.hero__grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+  align-items:start;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-size:13px;
+}
+.pill__dot{width:8px;height:8px;border-radius:99px;background:var(--accent)}
+
+h1{
+  margin-top:14px;
+  font-size:44px;
+  line-height:1.06;
+  letter-spacing:-.8px;
+}
+.lead{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.75;
+  max-width:70ch;
+}
+
+.hero__actions{
+  margin-top:18px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.trustline{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+.trustline__item{
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.70);
+}
+
+.micro{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.micro__badge{
+  font-size:12px;
+  font-weight:950;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(34,197,94,.28);
+  background:rgba(34,197,94,.12);
+  color:#14532d;
+}
+.micro__text{color:var(--muted);font-size:13px}
+
+/* Hero panel */
+.hero__panel{padding:18px}
+.panel__proof{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:10px;
+}
+.miniStat{
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.70);
+}
+.miniStat__k{color:var(--muted);font-size:12px}
+.miniStat__v{margin-top:4px;font-weight:950;font-size:13px}
+
+/* ---------- Form ---------- */
+.form{margin-top:12px}
+.form__row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.field{margin-top:10px}
+.field__label{
+  display:block;
+  margin:0 0 6px;
+  color:var(--muted);
+  font-size:13px;
+}
+.field__input{
+  width:100%;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.14);
+  background:rgba(255,255,255,.92);
+  padding:12px;
+  color:var(--text);
+  outline:none;
+  font-size:14px;
+}
+.field__input:focus{
+  border-color:rgba(37,99,235,.35);
+  box-shadow:0 0 0 4px rgba(37,99,235,.10);
+}
+.field__input--area{min-height:110px;resize:vertical}
+.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.5}
+
+/* ---------- Sections ---------- */
+.section{padding:44px 0}
+.section__head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.section__sub{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+.section__tag{
+  color:var(--muted);
+  font-size:13px;
+  border:1px solid rgba(15,23,42,.12);
+  background:rgba(255,255,255,.70);
+  padding:8px 10px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+
+/* ---------- Grids ---------- */
+.grid{display:grid;gap:14px}
+.grid--2{grid-template-columns:1fr 1fr}
+.grid--3{grid-template-columns:repeat(3, 1fr)}
+
+.card h3{font-size:15px;font-weight:950}
+.card p{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.65}
+
+/* ---------- Steps ---------- */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:14px;
+}
+.step{
+  display:flex;
+  gap:12px;
+  padding:18px;
+  border-radius:var(--radius);
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.70);
+}
+.step__n{
+  width:34px;height:34px;
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(37,99,235,.10);
+  border:1px solid rgba(37,99,235,.20);
+  font-weight:950;
+  flex:0 0 auto;
+  color:#1d4ed8;
+}
+.step__t{font-weight:950;font-size:14px}
+.step__d{margin-top:4px;color:var(--muted);font-size:14px;line-height:1.6}
+
+/* ---------- Banner ---------- */
+.banner{
+  margin-top:14px;
+  padding:18px;
+  border-radius:var(--radius);
+  border:1px solid rgba(15,23,42,.10);
+  background:
+    radial-gradient(520px 240px at 20% 10%, rgba(37,99,235,.12), transparent 60%),
+    rgba(255,255,255,.72);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.banner__title{font-weight:950}
+.banner__text{color:var(--muted);font-size:14px;line-height:1.6;max-width:60ch}
+
+/* ---------- Checklist ---------- */
+.check{margin-top:10px}
+.check li{margin:8px 0;color:var(--muted);font-size:14px;line-height:1.65}
+.check b{color:var(--text)}
+
+/* ---------- Quotes ---------- */
+.quotes{margin-top:10px;display:grid;gap:10px}
+.quote{
+  margin:0;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.70);
+  color:var(--text);
+  font-size:14px;
+  line-height:1.65;
+}
+.quote__who{
+  display:block;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* ---------- Stats ---------- */
+.stat{
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.70);
+}
+.stat__k{color:var(--muted);font-size:12px}
+.stat__v{margin-top:4px;font-weight:950;font-size:14px}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid;gap:12px}
+details{border-radius:var(--radius)}
+summary{
+  cursor:pointer;
+  font-weight:950;
+  list-style:none;
+}
+summary::-webkit-details-marker{display:none}
+details p{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* ---------- Contact list ---------- */
+.contactList{margin-top:12px;display:grid;gap:10px}
+.contactItem{
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.70);
+}
+.contactItem__k{color:var(--muted);font-size:12px}
+.contactItem__v{margin-top:4px;font-weight:950;font-size:14px}
+
+/* ---------- Footer ---------- */
+.footer{
+  margin-top:22px;
+  border-top:1px solid rgba(15,23,42,.12);
+  padding:18px 0;
+}
+.footer__inner{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.footer__brand{font-weight:950}
+.footer__muted{color:var(--muted);font-size:13px}
+.footer__right{display:flex;gap:12px;flex-wrap:wrap}
+.footer__right a{color:var(--muted)}
+.footer__right a:hover{color:var(--text)}
+
+/* =========================================================
+   PRO CAROUSEL (Gallery)
+   Requires:
+   .carousel .carousel__viewport .carousel__track .carousel__slide
+   .carousel__btn--prev / .carousel__btn--next
+   .carousel__dots .carousel__dot
+========================================================= */
+
+.carousel{
+  position:relative;
+  margin-top:14px;
+}
+
+/* Viewport shell */
+.carousel__viewport{
+  overflow:hidden;
+  border-radius:var(--radius);
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.60);
+  box-shadow:var(--shadow);
+  outline:none;
+}
+.carousel__viewport:focus{
+  box-shadow:var(--shadow), 0 0 0 4px rgba(37,99,235,.10);
+}
+
+/* Horizontal track (native scroll + snap) */
+.carousel__track{
+  display:flex;
+  gap:14px;
+  padding:14px;
+  scroll-snap-type:x mandatory;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+}
+.carousel__track::-webkit-scrollbar{display:none}
+
+/* Each slide */
+.carousel__slide{
+  flex:0 0 78%;
+  scroll-snap-align:start;
+  margin:0;
+  border-radius:16px;
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(255,255,255,.80);
+  overflow:hidden;
+}
+.carousel__slide img{
+  width:100%;
+  height:360px;
+  object-fit:cover;
+  user-select:none;
+}
+.carousel__slide figcaption{
+  padding:10px 12px;
+  font-size:13px;
+  color:var(--muted);
+  border-top:1px solid rgba(15,23,42,.08);
+  background:rgba(255,255,255,.86);
+}
+
+/* Arrow buttons */
+.carousel__btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.14);
+  background:rgba(255,255,255,.92);
+  color:var(--text);
+  font-weight:950;
+  font-size:22px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(15,23,42,.10);
+  transition:transform .08s ease, background .2s ease, box-shadow .2s ease;
+}
+.carousel__btn:hover{
+  background:#ffffff;
+  box-shadow:0 14px 30px rgba(15,23,42,.12);
+}
+.carousel__btn:active{transform:translateY(-50%) translateY(1px)}
+.carousel__btn--prev{left:10px}
+.carousel__btn--next{right:10px}
+
+/* Dots */
+.carousel__dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:10px;
+}
+.carousel__dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.18);
+  background:rgba(15,23,42,.10);
+  cursor:pointer;
+}
+.carousel__dot.is-active{
+  background:rgba(37,99,235,.55);
+  border-color:rgba(37,99,235,.65);
+  width:22px;
+}
+
+/* Optional: if you use the earlier non-carousel gallery classes too */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:14px;
+}
+.shot img{border-radius:16px}
+.shot figcaption{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 980px){
+  .carousel__slide{flex-basis:46%}
+  .carousel__slide img{height:420px}
+}
+
+@media (max-width: 980px){
+  .nav{display:none}
+  .hero__grid{grid-template-columns:1fr}
+  h1{font-size:38px}
+
+  .grid--2{grid-template-columns:1fr}
+  .grid--3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .form__row{grid-template-columns:1fr}
+  .panel__proof{grid-template-columns:1fr}
+
+  .section__head{align-items:flex-start}
+  .section__tag{white-space:normal}
+}
+
+@media (max-width: 520px){
+  .carousel__slide{flex-basis:92%}
+  .carousel__slide img{height:300px}
+  .carousel__btn{display:none} /* swipe-only on small screens */
+
+  .container{padding:0 18px}
+  .btn{height:42px}
+}
